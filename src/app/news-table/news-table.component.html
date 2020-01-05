@@ -15,7 +15,7 @@
             <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
               {{ allColumnHeaders[column] }}
             </th>
-            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ row.data[column] || '-' }}</td>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row" (click)="articleClicked(row.data);">{{ row.data[column] || '-' }}</td>
           </ng-container>
     
         </table>
