@@ -1,0 +1,41 @@
+<nb-layout>
+
+    <nb-layout-header fixed>
+        <a href="#" (click)="toggle()">
+            <nb-icon icon="menu-outline"></nb-icon>
+        </a>
+    </nb-layout-header>
+  
+    <nb-sidebar>
+        <button nbButton [nbPopover]="addForm" nbPopoverPlacement="bottom" size="tiny" *ngIf="this.collapsed; else fullWidthButton"><nb-icon icon="plus"></nb-icon></button>
+        
+        <ng-template #fullWidthButton>
+            <button nbButton fullWidth [nbPopover]="addForm" nbPopoverPlacement="bottom"><nb-icon icon="plus"></nb-icon>Add Symbol</button>
+        </ng-template>
+
+        <ng-template #addForm>
+            <form #f="ngForm" (ngSubmit)="addSymbol(f)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input nbInput type="text" required name="name" ngModel>
+                </div>
+                <div class="form-group">
+                    <label for="acronym">Acronym</label>
+                    <input nbInput type="text" required name="acronym" ngModel>
+                </div>
+                <button nbButton>Add</button>
+            </form>
+        </ng-template>
+
+        <nb-menu tag="sidebar-menu" [items]="items"></nb-menu>
+    </nb-sidebar>
+  
+    <nb-layout-column>
+      <router-outlet></router-outlet>
+    </nb-layout-column>
+  
+    <nb-layout-footer fixed class="colored-column-basic">
+
+    </nb-layout-footer>
+  
+</nb-layout>
