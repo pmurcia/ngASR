@@ -1,1 +1,6 @@
-<p>stock-chart works!</p>
+<nb-card>
+    <nb-card-header>{{ this.symbol }} Stock</nb-card-header>
+    <nb-card-body>
+        <canvas id="realtime">{{ this.chart }}</canvas>
+    </nb-card-body>
+</nb-card>
