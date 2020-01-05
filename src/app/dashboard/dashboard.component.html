@@ -14,17 +14,24 @@
         </ng-template>
 
         <ng-template #addForm>
-            <form #f="ngForm" (ngSubmit)="addSymbol(f)">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input nbInput type="text" required name="name" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="acronym">Acronym</label>
-                    <input nbInput type="text" required name="acronym" ngModel>
-                </div>
-                <button nbButton>Add</button>
-            </form>
+            <nb-card>
+                <nb-card-body>
+                    <form #f="ngForm" (ngSubmit)="addSymbol(f)">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <br/>
+                            <input type="text" nbInput required name="name" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="acronym">Acronym</label>
+                            <br/>
+                            <input type="text" nbInput required name="acronym" ngModel>
+                        </div>
+                        <br/>
+                        <button nbButton>Add</button>
+                    </form>
+                </nb-card-body>
+            </nb-card>
         </ng-template>
 
         <nb-menu tag="sidebar-menu" [items]="items"></nb-menu>
