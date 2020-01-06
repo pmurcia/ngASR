@@ -1,6 +1,14 @@
-<nb-card>
+<nb-card style="max-width: 80%; margin: auto;">
     <nb-card-header>
         {{ this.data.title }}
+        <ngx-flag-picker style="margin-left: 96%;"
+            [selectedCountryCode]="selectedCountryCode"
+            [countryCodes]="countryCodes"
+            (changedCountryCode)="changeSelectedCountryCode($event)"
+            [showFlags]="true" 
+            [showLabels]="false"
+        >
+        </ngx-flag-picker>
     </nb-card-header>
     <nb-card-body>
         {{ this.data.description }}

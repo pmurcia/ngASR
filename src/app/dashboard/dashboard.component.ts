@@ -49,5 +49,4 @@ export class DashboardComponent implements OnInit {
         }
       ], 'sidebar-menu');
   }
-
 }

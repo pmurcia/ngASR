@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbIconModule, NbSidebarModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbPopoverModule, NbCardModule, NbTreeGridModule, NbDialogModule, NbDialogConfig } from '@nebular/theme';
+import { NbIconModule, NbSidebarModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbPopoverModule, NbCardModule, NbTreeGridModule, NbDialogModule } from '@nebular/theme';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { MainPanelComponent } from '../main-panel/main-panel.component';
 import { StockChartComponent } from '../stock-chart/stock-chart.component';
 import { NewsTableComponent } from '../news-table/news-table.component';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
+import { NgxFlagPickerModule } from 'ngx-flag-picker';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ArticleModalComponent } from '../article-modal/article-modal.component'
     FormsModule,
     NbCardModule,
     NbTreeGridModule,
-    NbDialogModule.forChild()
+    NbDialogModule.forChild(),
+    NgxFlagPickerModule
   ],
   exports: [
     DashboardComponent
