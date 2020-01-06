@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ArticleModalComponent implements OnInit {
 
   @Input() data: any;
+  translationLoading = false;
 
   selectedCountryCode = 'us';
   countriesLanguages = {
@@ -27,6 +28,10 @@ export class ArticleModalComponent implements OnInit {
 
   changeSelectedCountryCode(value: string): void {
     this.selectedCountryCode = value;
+    this.translationLoading = true;
+    setTimeout(() => {
+      this.translationLoading = false;
+    }, 5000);
   }
 
 }

@@ -3,7 +3,7 @@
         {{ this.symbol }} Stock
         <nb-icon icon="sync" (click)="refreshStock()" right style="margin-left: 98%;"></nb-icon>
     </nb-card-header>
-    <nb-card-body [nbSpinner]="false">
+    <nb-card-body [nbSpinner]="this.stockLoading">
         <canvas id="realtime" height="80">{{ this.chart }}</canvas>
     </nb-card-body>
 </nb-card>

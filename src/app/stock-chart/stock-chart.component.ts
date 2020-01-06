@@ -11,6 +11,7 @@ export class StockChartComponent implements OnInit {
   protected chart: Chart;
   @Input() symbol: string;
   stockData: any;
+  stockLoading = false;
 
   constructor() { }
 
@@ -68,6 +69,10 @@ export class StockChartComponent implements OnInit {
   }
 
   refreshStock() {
+    this.stockLoading = true;
+    setTimeout(() => {
+      this.stockLoading = false;
+    }, 5000);
   }
 
 }

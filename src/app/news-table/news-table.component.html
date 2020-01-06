@@ -1,9 +1,9 @@
 <nb-card>
     <nb-card-header>
       News about {{ this.symbol }}
-      <nb-icon icon="sync" (click)="refreshNews()" right style="margin-left: 98%;"></nb-icon>
+      <nb-icon icon="sync" (click)="refreshNews()" style="margin-left: 98%;"></nb-icon>
     </nb-card-header>
-    <nb-card-body [nbSpinner]="false">
+    <nb-card-body [nbSpinner]="newsLoading">
 
         <label class="search-label" for="search">Search:</label>
         <input type="text" nbInput [nbFilterInput]="dataSource" id="search" placeholder="Search term...">

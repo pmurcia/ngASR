@@ -26,6 +26,9 @@ interface FSEntry {
 export class NewsTableComponent implements OnInit {
   @Input() symbol: string;
 
+  newsLoading = false;
+  scoreLoading = false;
+
   allColumns = ['pubDate', 'title', 'score'];
   allColumnHeaders = {
     pubDate: 'Publication Date',
@@ -117,8 +120,16 @@ export class NewsTableComponent implements OnInit {
   }
 
   refreshNews() {
+    this.newsLoading = true;
+    setTimeout(() => {
+      this.newsLoading = false;
+    }, 5000);
   }
 
   refreshScores() {
+    this.scoreLoading = true;
+    setTimeout(() => {
+      this.scoreLoading = false;
+    }, 5000);
   }
 }
