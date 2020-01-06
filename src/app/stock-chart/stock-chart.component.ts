@@ -67,4 +67,7 @@ export class StockChartComponent implements OnInit {
     this.chart = new Chart('realtime', config);
   }
 
+  refreshStock() {
+  }
+
 }

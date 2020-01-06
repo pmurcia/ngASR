@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 import { NbSidebarService, NbMenuItem, NbMenuService, NbPopoverDirective } from '@nebular/theme';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap, UrlSegment } from '@angular/router';
@@ -27,11 +27,6 @@ export class DashboardComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.url.subscribe(
-      paths => this.symbol = paths[0].path,
-      err => this.symbol = null
-    );
-    this.sidebarService.expand();
   }
 
   toggle() {
@@ -53,6 +48,12 @@ export class DashboardComponent implements OnInit {
       ], 'sidebar-menu');
 
     this.popover.hide();
-    this.router.navigateByUrl(symbolUrl);
+    this.router.navigateByUrl(symbolUrl).then(val => {
+      this.route.url.subscribe(
+        paths => this.symbol = paths[0].path,
+        err => this.symbol = null
+      );
+      this.sidebarService.expand();
+    });
   }
 }
