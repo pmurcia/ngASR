@@ -1,6 +1,6 @@
 <nb-card>
     <nb-card-header>{{ this.symbol }} Stock</nb-card-header>
-    <nb-card-body>
-        <canvas id="realtime">{{ this.chart }}</canvas>
+    <nb-card-body [nbSpinner]="false">
+        <canvas id="realtime" height="80">{{ this.chart }}</canvas>
     </nb-card-body>
 </nb-card>

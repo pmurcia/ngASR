@@ -1,21 +1,28 @@
 <nb-card>
     <nb-card-header>News about {{ this.symbol }}</nb-card-header>
-    <nb-card-body>
+    <nb-card-body [nbSpinner]="false">
 
         <label class="search-label" for="search">Search:</label>
-        <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
+        <input type="text" nbInput [nbFilterInput]="dataSource" id="search" placeholder="Search term...">
     
         <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
     
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
     
-          <ng-container *ngFor="let column of allColumns; let index = index"
-                        [nbTreeGridColumnDef]="column">
+          <ng-container *ngFor="let column of allColumns; let index = index" [nbTreeGridColumnDef]="column">
             <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
               {{ allColumnHeaders[column] }}
             </th>
-            <td nbTreeGridCell *nbTreeGridCellDef="let row" (click)="articleClicked(row.data);">{{ row.data[column] || '-' }}</td>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row" (click)="articleClicked(row.data);" style="cursor: pointer;">
+              <div *ngIf="column === 'score'; else defaultCell">
+                <nb-icon icon="star" [ngStyle]="{'color': getColorFromScore(row.data[column])}"></nb-icon>
+                {{ (row.data[column] | percent:'.2') || '-' }}
+              </div>
+              <ng-template #defaultCell>
+                {{ row.data[column] || '-' }}
+              </ng-template>
+            </td>
           </ng-container>
     
         </table>

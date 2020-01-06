@@ -1,5 +1,5 @@
 <nb-card style="max-width: 80%; margin: auto;">
-    <nb-card-header>
+    <nb-card-header [nbSpinner]="false">
         {{ this.data.title }}
         <ngx-flag-picker style="margin-left: 96%;"
             [selectedCountryCode]="selectedCountryCode"
@@ -10,10 +10,10 @@
         >
         </ngx-flag-picker>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body [nbSpinner]="false">
         {{ this.data.description }}
     </nb-card-body>
-    <nb-card-footer>
+    <nb-card-footer [nbSpinner]="false">
         For further reading, visit this <a [href]="this.data.link">link</a>
     </nb-card-footer>
   </nb-card>

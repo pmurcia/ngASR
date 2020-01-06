@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NbSidebarService, NbMenuItem, NbMenuService } from '@nebular/theme';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbSidebarService, NbMenuItem, NbMenuService, NbPopoverDirective } from '@nebular/theme';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,22 +9,13 @@ import { NgForm } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+
   collapsed = false;
 
   inputSymbol: any;
 
-  items: NbMenuItem[] = [
-    {
-      title: 'Google',
-      icon: 'google',
-      link: '/GOOGL',
-    },
-    {
-      title: 'Facebook',
-      icon: 'facebook',
-      link: '/FB',
-    },
-  ];
+  items: NbMenuItem[] = [];
 
   constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService) { }
 
@@ -44,9 +35,11 @@ export class DashboardComponent implements OnInit {
       [
         {
           title: `${symbolObj.name}`,
-          icon: 'plus-outline',
+          icon: 'chevron-right',
           link: `/${symbolObj.acronym}`,
         }
       ], 'sidebar-menu');
+
+    this.popover.hide();
   }
 }

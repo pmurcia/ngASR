@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { ArticleModalComponent } from './article-modal/article-modal.component';
 
 @NgModule({
   declarations: [

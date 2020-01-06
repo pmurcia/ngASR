@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Component, OnInit, Input } from '@angular/core';
+import { Chart, ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-stock-chart',
@@ -8,53 +8,35 @@ import { Chart } from 'chart.js';
 })
 export class StockChartComponent implements OnInit {
 
-  chart: Chart;
-  symbol: string;
+  protected chart: Chart;
+  @Input() symbol: string;
+  @Input() stockData: any;
 
   constructor() { }
 
   ngOnInit() {
-    const MONTHS = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ];
-
-    const config = {
+    const config: ChartConfiguration = {
       type: 'line',
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
-          label: 'My First dataset',
-          backgroundColor: 'blue',
-          borderColor: 'blue',
+          label: this.symbol,
+          backgroundColor: '#3366ff',
+          borderColor: '#3366ff',
           data: [
             1,
+            49,
             4,
-            9,
-            16,
-            25,
             36,
-            49
+            9,
+            25,
+            16
           ],
           fill: false,
         }]
       },
       options: {
         responsive: true,
-        title: {
-          display: true,
-          text: 'Chart.js Line Chart'
-        },
         tooltips: {
           mode: 'index',
           intersect: false,
@@ -68,7 +50,7 @@ export class StockChartComponent implements OnInit {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Month'
+              labelString: 'Time'
             }
           }],
           yAxes: [{
