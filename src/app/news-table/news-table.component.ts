@@ -24,7 +24,7 @@ interface FSEntry {
   styleUrls: ['./news-table.component.scss']
 })
 export class NewsTableComponent implements OnInit {
-  symbol: string;
+  @Input() symbol: string;
 
   allColumns = ['pubDate', 'title', 'score'];
   allColumnHeaders = {

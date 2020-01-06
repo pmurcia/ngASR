@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-panel',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-panel.component.scss']
 })
 export class MainPanelComponent implements OnInit {
+
+  @Input() symbol: string;
 
   constructor() { }
 

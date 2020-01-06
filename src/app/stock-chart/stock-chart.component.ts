@@ -10,7 +10,7 @@ export class StockChartComponent implements OnInit {
 
   protected chart: Chart;
   @Input() symbol: string;
-  @Input() stockData: any;
+  stockData: any;
 
   constructor() { }
 

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NbSidebarService, NbMenuItem, NbMenuService, NbPopoverDirective } from '@nebular/theme';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap, UrlSegment } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +17,20 @@ export class DashboardComponent implements OnInit {
   collapsed = false;
 
   inputSymbol: any;
-
   items: NbMenuItem[] = [];
 
-  constructor(private sidebarService: NbSidebarService, private menuService: NbMenuService) { }
+  symbol: string;
+
+  constructor(private sidebarService: NbSidebarService,
+              private menuService: NbMenuService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.url.subscribe(
+      paths => this.symbol = paths[0].path,
+      err => this.symbol = null
+    );
     this.sidebarService.expand();
   }
 
@@ -31,15 +42,17 @@ export class DashboardComponent implements OnInit {
 
   addSymbol(symbol: NgForm) {
     const symbolObj = symbol.value;
+    const symbolUrl = `/${symbolObj.acronym}`;
     this.menuService.addItems(
       [
         {
           title: `${symbolObj.name}`,
           icon: 'chevron-right',
-          link: `/${symbolObj.acronym}`,
+          link: symbolUrl,
         }
       ], 'sidebar-menu');
 
     this.popover.hide();
+    this.router.navigateByUrl(symbolUrl);
   }
 }
