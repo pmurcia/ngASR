@@ -77,7 +77,6 @@ export class NewsTableComponent implements OnInit {
         },
         title: 'Apple Shares End Years of Discount as Earnings Risk Seen Waning',
         pubDate: new Date('Jan 4, 2020, 4:00:00 PM'),
-        score: 0.948256
       },
     }
   ];
@@ -115,5 +114,11 @@ export class NewsTableComponent implements OnInit {
     const greenComponent = score >= 0 ? Math.round(255 * score) : 0;
 
     return `rgb(${ redComponent },${ greenComponent },0)`;
+  }
+
+  refreshNews() {
+  }
+
+  refreshScores() {
   }
 }

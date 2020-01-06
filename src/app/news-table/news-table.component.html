@@ -25,7 +25,7 @@
                 </div>
 
                 <ng-template #loadingScore>
-                  <nb-icon icon="sync" ()="refreshScores()" right style="margin-left: 98%;"></nb-icon>
+                  <nb-icon icon="sync" (click)="refreshScores()"></nb-icon>
                 </ng-template>
               </div>
               <ng-template #defaultCell>
