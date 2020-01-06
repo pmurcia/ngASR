@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, TemplateRef } from '@angular/core';
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbViewportRulerAdapter, NbDialogRef, NbDialogService } from '@nebular/theme';
+import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbDialogService } from '@nebular/theme';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
 import { R3TargetBinder } from '@angular/compiler';
 
@@ -113,9 +113,6 @@ export class NewsTableComponent implements OnInit {
   getColorFromScore(score: number) {
     const redComponent = score < 0 ? Math.round(-255 * score) : 0;
     const greenComponent = score >= 0 ? Math.round(255 * score) : 0;
-
-    // const redComponent = Math.round(255 / 2 * (1 - score));
-    // const greenComponent = Math.round(255 / 2 * score);
 
     return `rgb(${ redComponent },${ greenComponent },0)`;
   }

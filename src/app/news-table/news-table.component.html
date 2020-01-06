@@ -1,5 +1,8 @@
 <nb-card>
-    <nb-card-header>News about {{ this.symbol }}</nb-card-header>
+    <nb-card-header>
+      News about {{ this.symbol }}
+      <nb-icon icon="sync" (click)="refreshNews()" right style="margin-left: 98%;"></nb-icon>
+    </nb-card-header>
     <nb-card-body [nbSpinner]="false">
 
         <label class="search-label" for="search">Search:</label>
@@ -16,8 +19,14 @@
             </th>
             <td nbTreeGridCell *nbTreeGridCellDef="let row" (click)="articleClicked(row.data);" style="cursor: pointer;">
               <div *ngIf="column === 'score'; else defaultCell">
-                <nb-icon icon="star" [ngStyle]="{'color': getColorFromScore(row.data[column])}"></nb-icon>
-                {{ (row.data[column] | percent:'.2') || '-' }}
+                <div *ngIf="row.data[column] != null; else loadingScore;">
+                  <nb-icon icon="star" [ngStyle]="{'color': getColorFromScore(row.data[column])}"></nb-icon>
+                  {{ (row.data[column] | percent:'.2') || '-' }}
+                </div>
+
+                <ng-template #loadingScore>
+                  <nb-icon icon="sync" ()="refreshScores()" right style="margin-left: 98%;"></nb-icon>
+                </ng-template>
               </div>
               <ng-template #defaultCell>
                 {{ row.data[column] || '-' }}
