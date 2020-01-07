@@ -53,7 +53,7 @@ export class NewsTableComponent implements OnInit {
         },
         title: 'Top 3 Mutual Funds that Hold Google Stock',
         pubDate: new Date('Jan 5, 2020, 3:55:27 PM'),
-        score: -0.353265
+        score: -1
       }
     },
     {
@@ -66,7 +66,7 @@ export class NewsTableComponent implements OnInit {
         },
         title: 'Investors are misplacing threats to the U.S. stock market',
         pubDate: new Date('Jan 4, 2020, 5:18:00 PM'),
-        score: 0.00025695
+        score: 0
       }
     },
     {
@@ -80,6 +80,7 @@ export class NewsTableComponent implements OnInit {
         },
         title: 'Apple Shares End Years of Discount as Earnings Risk Seen Waning',
         pubDate: new Date('Jan 4, 2020, 4:00:00 PM'),
+        score : 1
       },
     }
   ];
@@ -113,10 +114,11 @@ export class NewsTableComponent implements OnInit {
   }
 
   getColorFromScore(score: number) {
-    const redComponent = score < 0 ? Math.round(-255 * score) : 0;
-    const greenComponent = score >= 0 ? Math.round(255 * score) : 0;
+    const redComponent = score > 0 ? Math.round(255 * (1 - score)) : 255;
+    const greenComponent = Math.round(170 + 76.5 * score - 32.5 * Math.pow(score, 2));
+    const blueComponent = Math.round(15 * score + 128 * Math.pow(score, 2));
 
-    return `rgb(${ redComponent },${ greenComponent },0)`;
+    return `rgb(${ redComponent },${ greenComponent },${ blueComponent })`;
   }
 
   refreshNews() {
