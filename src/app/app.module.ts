@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { ServerApiService } from './server-api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
     NbEvaIconsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    DashboardModule
+    DashboardModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ServerApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

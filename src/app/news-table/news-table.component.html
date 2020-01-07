@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card *ngIf="this.data != null">
     <nb-card-header>
       News about {{ this.symbol }}
       <nb-icon icon="sync" (click)="refreshNews()" style="margin-left: 98%;"></nb-icon>
@@ -25,7 +25,7 @@
                 </div>
 
                 <ng-template #loadingScore>
-                  <nb-icon icon="sync" (click)="refreshScores()"></nb-icon>
+                  <nb-icon icon="plus" (click)="refreshScore(row.data)"></nb-icon>
                 </ng-template>
               </div>
               <ng-template #defaultCell>

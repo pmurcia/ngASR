@@ -1,39 +1,63 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
+import { ServerApiService } from '../server-api.service';
 
 @Component({
   selector: 'app-stock-chart',
   templateUrl: './stock-chart.component.html',
   styleUrls: ['./stock-chart.component.scss']
 })
-export class StockChartComponent implements OnInit {
+export class StockChartComponent implements OnInit, OnChanges {
 
   protected chart: Chart;
   @Input() symbol: string;
+  @Input() defaultData: any;
   stockData: any;
   stockLoading = false;
+  config: ChartConfiguration;
 
-  constructor() { }
+  constructor(private api: ServerApiService) { }
 
   ngOnInit() {
-    const config: ChartConfiguration = {
-      type: 'line',
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const newData = changes.defaultData.currentValue;
+    if (newData != null) {
+      console.log(newData);
+      this.stockData = this.parseStockData(newData);
+      this.updateChart();
+    }
+  }
+
+  refreshStock() {
+    this.stockLoading = true;
+    this.api.getStock(this.symbol).toPromise().then(data => {
+      this.stockData = this.parseStockData(data);
+      this.updateChart();
+      this.stockLoading = false;
+    })
+    .catch(err => console.error(err));
+
+    setTimeout(() => this.stockLoading = false, 5000);
+  }
+
+  updateChart() {
+    const dataLabels = this.stockData.map((d: any) => d.t);
+    const dataValues = this.stockData.map((d: any) => d.y);
+
+    this.config = {
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: dataLabels,
         datasets: [{
           label: this.symbol,
           backgroundColor: '#3366ff',
           borderColor: '#3366ff',
-          data: [
-            1,
-            49,
-            4,
-            36,
-            9,
-            25,
-            16
-          ],
+          data: dataValues,
           fill: false,
+          type: 'line',
+          pointRadius: 0,
+          lineTension: 0
         }]
       },
       options: {
@@ -48,31 +72,39 @@ export class StockChartComponent implements OnInit {
         },
         scales: {
           xAxes: [{
+            type: 'time',
+            distribution: 'series',
+            time: {
+              unit: 'day'
+            },
             display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Time'
+            ticks: {
+              source: 'auto'
             }
           }],
           yAxes: [{
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Value'
+              labelString: 'Closing price ($)'
             }
           }]
-        }
+        },
       }
     };
 
-    this.chart = new Chart('realtime', config);
+    this.chart = new Chart('realtime', this.config);
   }
 
-  refreshStock() {
-    this.stockLoading = true;
-    setTimeout(() => {
-      this.stockLoading = false;
-    }, 5000);
+  parseStockData(data: any) {
+    const parsedData = data.map((d: any) => {
+      return {
+        t: new Date(d.date),
+        y: d.close
+      };
+    });
+
+    return parsedData;
   }
 
 }

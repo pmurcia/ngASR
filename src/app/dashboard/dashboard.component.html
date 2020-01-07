@@ -38,7 +38,7 @@
     </nb-sidebar>
   
     <nb-layout-column>
-        <app-main-panel *ngIf="this.items.length > 0" [symbol]="this.symbol"></app-main-panel>
+        <app-main-panel *ngIf="this.items.length > 0" [defaultData]="this.data" [nbSpinner]="panelLoading"></app-main-panel>
         <!-- <router-outlet></router-outlet> -->
     </nb-layout-column>
   
