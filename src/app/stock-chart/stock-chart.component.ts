@@ -24,7 +24,6 @@ export class StockChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const newData = changes.defaultData.currentValue;
     if (newData != null) {
-      console.log(newData);
       this.stockData = this.parseStockData(newData);
       this.updateChart();
     }

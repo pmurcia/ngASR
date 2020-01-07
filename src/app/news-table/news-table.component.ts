@@ -81,7 +81,8 @@ export class NewsTableComponent implements OnInit, OnChanges {
   articleClicked(object: any) {
     this.dialogService.open(ArticleModalComponent, {
       context: {
-        data: object
+        data: object,
+        symbol: this.symbol
       }
     });
   }

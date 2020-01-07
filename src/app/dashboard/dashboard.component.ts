@@ -57,7 +57,6 @@ export class DashboardComponent implements OnInit {
       this.route.url.subscribe(
         paths => {
           this.symbol = paths[0].path;
-          console.log(this.symbol);
           this.changeData(this.symbol);
         },
         err => this.symbol = null

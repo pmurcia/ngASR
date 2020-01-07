@@ -26,7 +26,7 @@ export class ServerApiService {
     return this.http.get(`http://localhost:8080/practicaFinal/api/data?symbol=${symbol}&ng=1`);
   }
 
-  getTranslation(symbol: string, newId: string) {
-    return this.http.get(`http://localhost:8080/practicaFinal/api/translate?symbol=${symbol}&id=${newId}&ng=1`);
+  getTranslation(symbol: string, newId: string, language: string) {
+    return this.http.get(`http://localhost:8080/practicaFinal/api/translate?symbol=${symbol}&id=${newId}&lang=${language}&ng=1`);
   }
 }
